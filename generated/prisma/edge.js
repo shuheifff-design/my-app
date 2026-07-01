@@ -94,7 +94,8 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  name: 'name',
+  age: 'age'
 };
 
 exports.Prisma.SortOrder = {
@@ -105,6 +106,11 @@ exports.Prisma.SortOrder = {
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
 };
 
 
@@ -119,14 +125,14 @@ const config = {
   "clientVersion": "7.8.0",
   "engineVersion": "3c6e192761c0362d496ed980de936e2f3cebcd3a",
   "activeProvider": "postgresql",
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id   Int    @id @default(autoincrement())\n  name String\n}\n"
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id   Int    @id @default(autoincrement())\n  name String\n  age  Int?\n}\n"
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"age\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.parameterizationSchema = {
-  strings: JSON.parse("[\"where\",\"User.findUnique\",\"User.findUniqueOrThrow\",\"orderBy\",\"cursor\",\"User.findFirst\",\"User.findFirstOrThrow\",\"User.findMany\",\"data\",\"User.createOne\",\"User.createMany\",\"User.createManyAndReturn\",\"User.updateOne\",\"User.updateMany\",\"User.updateManyAndReturn\",\"create\",\"update\",\"User.upsertOne\",\"User.deleteOne\",\"User.deleteMany\",\"having\",\"_count\",\"_avg\",\"_sum\",\"_min\",\"_max\",\"User.groupBy\",\"User.aggregate\",\"AND\",\"OR\",\"NOT\",\"id\",\"name\",\"equals\",\"in\",\"notIn\",\"lt\",\"lte\",\"gt\",\"gte\",\"contains\",\"startsWith\",\"endsWith\",\"not\",\"set\",\"increment\",\"decrement\",\"multiply\",\"divide\"]"),
-  graph: "KwsQBRwAACIAMB0AAAQAEB4AACIAMB8CAAAAASABACQAIQEAAAABACABAAAAAQAgBRwAACIAMB0AAAQAEB4AACIAMB8CACMAISABACQAIQADAAAABAAgAwAABQAwBAAAAQAgAwAAAAQAIAMAAAUAMAQAAAEAIAMAAAAEACADAAAFADAEAAABACACHwIAAAABIAEAAAABAQgAAAkAIAIfAgAAAAEgAQAAAAEBCAAACwAwAQgAAAsAMAIfAgArACEgAQAqACECAAAAAQAgCAAADgAgAh8CACsAISABACoAIQIAAAAEACAIAAAQACACAAAABAAgCAAAEAAgAwAAAAEAIA8AAAkAIBAAAA4AIAEAAAABACABAAAABAAgBRUAACUAIBYAACYAIBcAACkAIBgAACgAIBkAACcAIAUcAAAaADAdAAAXABAeAAAaADAfAgAbACEgAQAcACEDAAAABAAgAwAAFgAwFAAAFwAgAwAAAAQAIAMAAAUAMAQAAAEAIAUcAAAaADAdAAAXABAeAAAaADAfAgAbACEgAQAcACENFQAAHgAgFgAAIQAgFwAAHgAgGAAAHgAgGQAAHgAgIQIAAAABIgIAAAAEIwIAAAAEJAIAAAABJQIAAAABJgIAAAABJwIAAAABKwIAIAAhDhUAAB4AIBgAAB8AIBkAAB8AICEBAAAAASIBAAAABCMBAAAABCQBAAAAASUBAAAAASYBAAAAAScBAAAAASgBAAAAASkBAAAAASoBAAAAASsBAB0AIQ4VAAAeACAYAAAfACAZAAAfACAhAQAAAAEiAQAAAAQjAQAAAAQkAQAAAAElAQAAAAEmAQAAAAEnAQAAAAEoAQAAAAEpAQAAAAEqAQAAAAErAQAdACEIIQIAAAABIgIAAAAEIwIAAAAEJAIAAAABJQIAAAABJgIAAAABJwIAAAABKwIAHgAhCyEBAAAAASIBAAAABCMBAAAABCQBAAAAASUBAAAAASYBAAAAAScBAAAAASgBAAAAASkBAAAAASoBAAAAASsBAB8AIQ0VAAAeACAWAAAhACAXAAAeACAYAAAeACAZAAAeACAhAgAAAAEiAgAAAAQjAgAAAAQkAgAAAAElAgAAAAEmAgAAAAEnAgAAAAErAgAgACEIIQgAAAABIggAAAAEIwgAAAAEJAgAAAABJQgAAAABJggAAAABJwgAAAABKwgAIQAhBRwAACIAMB0AAAQAEB4AACIAMB8CACMAISABACQAIQghAgAAAAEiAgAAAAQjAgAAAAQkAgAAAAElAgAAAAEmAgAAAAEnAgAAAAErAgAeACELIQEAAAABIgEAAAAEIwEAAAAEJAEAAAABJQEAAAABJgEAAAABJwEAAAABKAEAAAABKQEAAAABKgEAAAABKwEAHwAhAAAAAAABLAEAAAABBSwCAAAAAS0CAAAAAS4CAAAAAS8CAAAAATACAAAAAQAAAAAFFQAGFgAHFwAIGAAJGQAKAAAAAAAFFQAGFgAHFwAIGAAJGQAKAQIBAgMBBQYBBgcBBwgBCQoBCgwCCw0DDA8BDRECDhIEERMBEhQBExUCGhgFGxkL"
+  strings: JSON.parse("[\"where\",\"User.findUnique\",\"User.findUniqueOrThrow\",\"orderBy\",\"cursor\",\"User.findFirst\",\"User.findFirstOrThrow\",\"User.findMany\",\"data\",\"User.createOne\",\"User.createMany\",\"User.createManyAndReturn\",\"User.updateOne\",\"User.updateMany\",\"User.updateManyAndReturn\",\"create\",\"update\",\"User.upsertOne\",\"User.deleteOne\",\"User.deleteMany\",\"having\",\"_count\",\"_avg\",\"_sum\",\"_min\",\"_max\",\"User.groupBy\",\"User.aggregate\",\"AND\",\"OR\",\"NOT\",\"id\",\"name\",\"age\",\"equals\",\"in\",\"notIn\",\"lt\",\"lte\",\"gt\",\"gte\",\"not\",\"contains\",\"startsWith\",\"endsWith\",\"set\",\"increment\",\"decrement\",\"multiply\",\"divide\"]"),
+  graph: "MgsQBhwAACYAMB0AAAQAEB4AACYAMB8CAAAAASABACgAISECACkAIQEAAAABACABAAAAAQAgBhwAACYAMB0AAAQAEB4AACYAMB8CACcAISABACgAISECACkAIQEhAAAqACADAAAABAAgAwAABQAwBAAAAQAgAwAAAAQAIAMAAAUAMAQAAAEAIAMAAAAEACADAAAFADAEAAABACADHwIAAAABIAEAAAABIQIAAAABAQgAAAkAIAMfAgAAAAEgAQAAAAEhAgAAAAEBCAAACwAwAQgAAAsAMAMfAgAyACEgAQAwACEhAgAxACECAAAAAQAgCAAADgAgAx8CADIAISABADAAISECADEAIQIAAAAEACAIAAAQACACAAAABAAgCAAAEAAgAwAAAAEAIA8AAAkAIBAAAA4AIAEAAAABACABAAAABAAgBhUAACsAIBYAACwAIBcAAC8AIBgAAC4AIBkAAC0AICEAACoAIAYcAAAaADAdAAAXABAeAAAaADAfAgAbACEgAQAcACEhAgAdACEDAAAABAAgAwAAFgAwFAAAFwAgAwAAAAQAIAMAAAUAMAQAAAEAIAYcAAAaADAdAAAXABAeAAAaADAfAgAbACEgAQAcACEhAgAdACENFQAAIgAgFgAAJQAgFwAAIgAgGAAAIgAgGQAAIgAgIgIAAAABIwIAAAAEJAIAAAAEJQIAAAABJgIAAAABJwIAAAABKAIAAAABKQIAJAAhDhUAACIAIBgAACMAIBkAACMAICIBAAAAASMBAAAABCQBAAAABCUBAAAAASYBAAAAAScBAAAAASgBAAAAASkBACEAISoBAAAAASsBAAAAASwBAAAAAQ0VAAAfACAWAAAgACAXAAAfACAYAAAfACAZAAAfACAiAgAAAAEjAgAAAAUkAgAAAAUlAgAAAAEmAgAAAAEnAgAAAAEoAgAAAAEpAgAeACENFQAAHwAgFgAAIAAgFwAAHwAgGAAAHwAgGQAAHwAgIgIAAAABIwIAAAAFJAIAAAAFJQIAAAABJgIAAAABJwIAAAABKAIAAAABKQIAHgAhCCICAAAAASMCAAAABSQCAAAABSUCAAAAASYCAAAAAScCAAAAASgCAAAAASkCAB8AIQgiCAAAAAEjCAAAAAUkCAAAAAUlCAAAAAEmCAAAAAEnCAAAAAEoCAAAAAEpCAAgACEOFQAAIgAgGAAAIwAgGQAAIwAgIgEAAAABIwEAAAAEJAEAAAAEJQEAAAABJgEAAAABJwEAAAABKAEAAAABKQEAIQAhKgEAAAABKwEAAAABLAEAAAABCCICAAAAASMCAAAABCQCAAAABCUCAAAAASYCAAAAAScCAAAAASgCAAAAASkCACIAIQsiAQAAAAEjAQAAAAQkAQAAAAQlAQAAAAEmAQAAAAEnAQAAAAEoAQAAAAEpAQAjACEqAQAAAAErAQAAAAEsAQAAAAENFQAAIgAgFgAAJQAgFwAAIgAgGAAAIgAgGQAAIgAgIgIAAAABIwIAAAAEJAIAAAAEJQIAAAABJgIAAAABJwIAAAABKAIAAAABKQIAJAAhCCIIAAAAASMIAAAABCQIAAAABCUIAAAAASYIAAAAAScIAAAAASgIAAAAASkIACUAIQYcAAAmADAdAAAEABAeAAAmADAfAgAnACEgAQAoACEhAgApACEIIgIAAAABIwIAAAAEJAIAAAAEJQIAAAABJgIAAAABJwIAAAABKAIAAAABKQIAIgAhCyIBAAAAASMBAAAABCQBAAAABCUBAAAAASYBAAAAAScBAAAAASgBAAAAASkBACMAISoBAAAAASsBAAAAASwBAAAAAQgiAgAAAAEjAgAAAAUkAgAAAAUlAgAAAAEmAgAAAAEnAgAAAAEoAgAAAAEpAgAfACEAAAAAAAABLQEAAAABBS0CAAAAAS4CAAAAAS8CAAAAATACAAAAATECAAAAAQUtAgAAAAEuAgAAAAEvAgAAAAEwAgAAAAExAgAAAAEAAAAABRUABhYABxcACBgACRkACgAAAAAABRUABhYABxcACBgACRkACgECAQIDAQUGAQYHAQcIAQkKAQoMAgsNAwwPAQ0RAg4SBBETARIUARMVAhoYBRsZCw"
 }
 config.compilerWasm = {
   getRuntime: async () => require('./query_compiler_fast_bg.js'),
